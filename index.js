@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, './client/build')));
 require("./app/routes/user.routes")(app);
 require("./app/routes/category.routes")(app);
 require("./app/routes/item.routes")(app);
-app.get('*', (req, res) =>{
+router.get('*', (req, res) =>{
     res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
 });
 
