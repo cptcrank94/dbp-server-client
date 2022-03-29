@@ -30,15 +30,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Starting route
-app.use(express.static(path.resolve(__dirname, './client/build')));
-app.get('/', (req, res) =>{
-    res.send('Home Page')
- })
+app.use(express.static(path.join(__dirname, './client/build')));
 
 // Routes
 require("./app/routes/user.routes")(app);
 require("./app/routes/category.routes")(app);
 require("./app/routes/item.routes")(app);
+app.get('*', (req, res) =>{
+    res.sendFile(path.join(__dirname, "/client/build/index.html"));
+});
 
 const { API_PORT } = process.env;
 const PORT = process.env.PORT || API_PORT; 
