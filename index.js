@@ -29,6 +29,11 @@ app.use(bodyParser.json());
 // Parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: true}));
 
+// Starting route
+app.get('/', function(req, res) {
+    app.use(express.static(path.resolve(__dirname, "./client/build"))); 
+});
+
 // Routes
 require("./app/routes/user.routes")(app);
 require("./app/routes/category.routes")(app);
