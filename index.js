@@ -2,11 +2,13 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 const app = express();
 /*var corsOptions = {
     origin: "http://localhost:3000/"
 };*/
 
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.use(cors());
 const db = require("./app/models");
 db.mongoose
@@ -26,10 +28,6 @@ db.mongoose
 app.use(bodyParser.json());
 // Parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: true}));
-// Simple route
-app.get("/", (req, res) => {
-    res.json({ message: 'Welcome to Restaurant API'});
-})
 
 // Routes
 require("./app/routes/user.routes")(app);
