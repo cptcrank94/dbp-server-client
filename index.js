@@ -30,13 +30,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Starting route
-app.use(express.static("/", path.join(__dirname, "./client/build")));
+app.use('/', express.static(path.join(__dirname, './client/build')));
 
 // Routes
 require("./app/routes/user.routes")(app);
 require("./app/routes/category.routes")(app);
 require("./app/routes/item.routes")(app);
-
 
 const { API_PORT } = process.env;
 const PORT = process.env.PORT || API_PORT; 
