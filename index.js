@@ -8,7 +8,6 @@ const app = express();
     origin: "http://localhost:3000/"
 };*/
 
-app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.use(cors());
 const db = require("./app/models");
 db.mongoose
@@ -30,9 +29,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Starting route
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.get('/', function(req, res) {
-    app.use(express.static(path.resolve(__dirname, "./client/build"))); 
-});
+    res.sendFile(path.join(__dirname, '/build/index.html'));
+})
 
 // Routes
 require("./app/routes/user.routes")(app);
