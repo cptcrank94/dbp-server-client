@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+const router = express.Router();
 /*var corsOptions = {
     origin: "http://localhost:3000/"
 };*/
@@ -29,10 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Starting route
-app.use(express.static(path.resolve(__dirname, "./client/build")));
-app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'));
-})
+app.use(express.static(path.resolve(__dirname, "/client/build")));
 
 // Routes
 require("./app/routes/user.routes")(app);
