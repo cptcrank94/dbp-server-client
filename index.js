@@ -31,9 +31,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // Starting route
 app.use(express.static(path.resolve(__dirname, './client/build')));
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, './client', 'build', 'index.html'));
-});
 
 // Routes
 require("./app/routes/user.routes")(app);
