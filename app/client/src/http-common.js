@@ -1,6 +1,7 @@
 import axios from 'axios';
+var base_url = window.location.origin + ':';
 export default axios.create({
-    baseURL: "http://localhost:8080/api",
+    baseURL: base_url + process.env.PORT,
     headers: {
         "Content-Type": "application/json",
         'Access-Control-Allow-Origin': "*"
