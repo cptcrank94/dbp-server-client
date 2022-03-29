@@ -35,9 +35,7 @@ require("./app/routes/category.routes")(app);
 require("./app/routes/item.routes")(app);
 
 // Starting route
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'));
-});
+app.use('/', express.static(path.join(__dirname, "/client/build")));
 
 const { API_PORT } = process.env;
 const PORT = process.env.PORT || API_PORT; 
