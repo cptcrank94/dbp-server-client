@@ -4,7 +4,7 @@ class ItemDataService {
         return http.get(`/items/${catName}`);
     }
     get(id) {
-        return http.get(`/items/${id}`);
+        return http.get(`/items/detail/${id}`);
     }
     create(data) {
         return http.post("/items", data);

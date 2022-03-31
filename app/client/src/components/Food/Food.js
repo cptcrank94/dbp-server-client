@@ -110,7 +110,7 @@ class Food extends Component {
                                     <span className="monthly-card-item-desc">{item.description}</span>
                                     <h3 className="monthly-card-item-price">{item.price.priceTag}</h3>
                                     <Link 
-                                        to={`/items/${item.id}`}
+                                        to={`/items/detail/${item.id}`}
                                         className="item-link">
                                             <span className="arrow arrow-right"></span>
                                     </Link>

@@ -47,9 +47,8 @@ exports.create = (req, res) => {
 
 // Retrieve all Cards
 exports.findAll = (req, res) => {
-    //const title = req.query.title;
     const catName = req.params.catName;
-    var condition = catName ? { parent: { $regex: new RegExp(catName), $options: "i" } } : {};
+    //var condition = catName ? { parent: { $regex: new RegExp(catName), $options: "i" } } : {};
     Item.find()
         .then(data => {
             const returnData = data.filter(item => item.category == catName);

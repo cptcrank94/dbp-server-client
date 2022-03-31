@@ -7,7 +7,7 @@ module.exports = app => {
     // Alle Artikel anzeigen
     router.get("/:catName", items.findAll);
     // Zeige Artikel mit ID an
-    router.get("/:id", items.findOne);
+    router.get("/detail/:id", items.findOne);
     // Einen Artikel updaten
     router.put("/:id", auth, items.update);
     // Einen Artikel anhand der ID löschen

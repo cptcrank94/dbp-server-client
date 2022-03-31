@@ -14,7 +14,6 @@ export const ItemDetail = (props) => {
         .then((response) => {
             setItem(response.data);
             setLoading(false);
-            console.log(response.data);
         })
         .catch((e) => {
             console.log(e);
@@ -38,6 +37,7 @@ export const ItemDetail = (props) => {
                         <h1 className="item-detail-title">{Item.title}</h1>
                         <span className="item-detail-desc">{Item.description}</span>
                         {
+                            
                             Object.entries(Item.price).map(([key, value]) => (
                                 <div key={key} className="item-detail-price">
                                     <span className="item-detal-price-portion-small">{value.size}</span>
