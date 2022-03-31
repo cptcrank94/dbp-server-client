@@ -6,7 +6,7 @@ import {
     DELETE_ALL_ITEMS,
 } from './type.js';
 import ItemDataService from '../services/item.service';
-export const createItem = (title, description, featured, price, parent, category, extras, allergies ) => async (dispatch) => {
+export const createItem = (title, description, featured, price, category, extras, allergies ) => async (dispatch) => {
     try {
         const res = await ItemDataService.create({
             title: title,
@@ -30,6 +30,7 @@ export const createItem = (title, description, featured, price, parent, category
 export const retrieveItems = (catName) => async(dispatch) => {
     try {
         const res = await ItemDataService.getAll(catName);
+        console.log(res);
         dispatch({
             type: RETRIEVE_ITEMS,
             payload: res.data,
