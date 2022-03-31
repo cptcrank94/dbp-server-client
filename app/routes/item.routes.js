@@ -5,7 +5,7 @@ module.exports = app => {
     // Neuen Artikel erstellen
     router.post("/", auth, items.create);
     // Alle Artikel anzeigen
-    router.get("/", items.findAll);
+    router.get("/:catName", items.findAll);
     // Zeige Artikel mit ID an
     router.get("/:id", items.findOne);
     // Einen Artikel updaten

@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { retrieveItems } from '../../actions/items';
+import { retrieveCats } from '../../actions/categorys';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -8,26 +9,46 @@ class Food extends Component {
     constructor(props) {
         super(props);
         this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
+        this.onClickSwitchCat = this.onClickSwitchCat.bind(this);
         this.refreshData = this.refreshData.bind(this);
         this.setItems = this.setItems.bind(this);
+        this.setCats = this.setCats.bind(this);
+        this.setCurrentCat = this.setCurrentCat.bind(this);
         this.state = {
             currentItems: null,
+            currentCats: null,
+            currentCat: "Salat",
             searchTitle: "",
         };
     }
 
     componentDidMount() {
-        this.props.retrieveItems();
+        this.props.retrieveItems(this.state.currentCat);
+        this.props.retrieveCats();
     }
+
+    componentDidUpdate() {
+        this.props.retrieveItems(this.state.currentCat);
+    }
+
     onChangeSearchTitle(e) {
         const searchTitle = e.target.value;
         this.setState({
             searchTitle: searchTitle,
         });
     }
+
+    onClickSwitchCat(e) {
+        const selectedCat = e.target.id;
+        this.setState({
+            currentCat: selectedCat
+        });
+    }
+
     refreshData() {
         this.setState({
-            currentItems: null
+            currentItems: null,
+            currentCats: null
         });
     }
 
@@ -37,8 +58,20 @@ class Food extends Component {
         });
     }
 
+    setCurrentCat(currentCat) {
+        this.setState({
+            currentCat: currentCat
+        })
+    }
+
+    setCats(cat) {
+        this.setState({
+            currentCats: cat
+        })
+    }
+
     render() {
-        const { items } = this.props;
+        const { items, cats } = this.props;
         return(
             <>
                 <div className="header">
@@ -52,6 +85,23 @@ class Food extends Component {
                     </div>
                 </div>
                 <div className="content">
+                    <div className="category-navigation">
+                        <ul className="cat-nav">
+                            {
+                                cats &&
+                                    cats.map((item, index) => (
+                                        <li
+                                            key={index}
+                                            id={item.title}
+                                            className={(this.state.currentCat === item.title) ? 'cat-item active' : 'cat-item'}
+                                            onClick={this.onClickSwitchCat}
+                                        >
+                                            {item.title}
+                                        </li>
+                                    ))
+                            }
+                        </ul>
+                    </div>
                     <div className="item-container">
                         { items &&
                             items.map((item, index) => (
@@ -77,7 +127,8 @@ class Food extends Component {
 const mapStateToProps = (state) => {
     return {
         items: state.items,
+        cats: state.cats
     };
 };
 
-export default connect(mapStateToProps, { retrieveItems })(Food);
+export default connect(mapStateToProps, { retrieveItems, retrieveCats })(Food);

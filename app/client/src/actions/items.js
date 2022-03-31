@@ -13,7 +13,6 @@ export const createItem = (title, description, featured, price, parent, category
             description: description,
             featured: featured,
             price: price,
-            parent: parent,
             category: category,
             extras: extras,
             allergies: allergies
@@ -28,9 +27,9 @@ export const createItem = (title, description, featured, price, parent, category
     }
 };
 
-export const retrieveItems = () => async(dispatch) => {
+export const retrieveItems = (catName) => async(dispatch) => {
     try {
-        const res = await ItemDataService.getAll();
+        const res = await ItemDataService.getAll(catName);
         dispatch({
             type: RETRIEVE_ITEMS,
             payload: res.data,

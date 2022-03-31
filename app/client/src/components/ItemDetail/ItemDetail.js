@@ -14,6 +14,7 @@ export const ItemDetail = (props) => {
         .then((response) => {
             setItem(response.data);
             setLoading(false);
+            console.log(response.data);
         })
         .catch((e) => {
             console.log(e);

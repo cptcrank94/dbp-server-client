@@ -7,8 +7,7 @@ module.exports = mongoose => {
                 size: { type: String },
                 priceTag: { type: String } 
             }],
-            parent: String,
-            category: Number,
+            category: String,
             featured: Boolean,
             extras: [{
                 name: { type: String },

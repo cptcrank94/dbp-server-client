@@ -47,11 +47,13 @@ exports.create = (req, res) => {
 
 // Retrieve all Cards
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-    Item.find(condition)
+    //const title = req.query.title;
+    const catName = req.params.catName;
+    var condition = catName ? { parent: { $regex: new RegExp(catName), $options: "i" } } : {};
+    Item.find()
         .then(data => {
-            res.send(data);
+            const returnData = data.filter(item => item.category == catName);
+            res.send(returnData);
         })
         .catch(err => {
             res.status(500).send({ message: err.message || "Es ist ein Fehler beim Abrufen aller Artikel aufgetreten." })
