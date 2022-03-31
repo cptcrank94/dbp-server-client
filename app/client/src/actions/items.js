@@ -30,7 +30,6 @@ export const createItem = (title, description, featured, price, category, extras
 export const retrieveItems = (catName) => async(dispatch) => {
     try {
         const res = await ItemDataService.getAll(catName);
-        console.log(res);
         dispatch({
             type: RETRIEVE_ITEMS,
             payload: res.data,
