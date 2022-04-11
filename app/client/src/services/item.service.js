@@ -6,6 +6,9 @@ class ItemDataService {
     get(id) {
         return http.get(`/items/detail/${id}`);
     }
+    getFeatured() {
+        return http.get(`/items/featured/`);
+    }
     create(data) {
         return http.post("/items", data);
     }

@@ -3,8 +3,10 @@ module.exports = app => {
     var router = require("express").Router();
     const auth = require("../middleware/auth");
     // Als User einloggen
-    router.post("/login", user.findOne);
-    // Neuen User anlegen
-    router.post("/register", auth, user.create);
-    app.use("/api/user", router);
+    router.post("/login", user.login);
+    // Refresk Token
+    router.post("/refresh-token", user.refreshToken);
+    // Logout
+    router.delete("/logout", user.logout);
+    app.use("/api/auth", router);
 }

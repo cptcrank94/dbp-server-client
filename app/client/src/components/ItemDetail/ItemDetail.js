@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ItemDataService from '../../services/item.service';
 
@@ -8,6 +8,7 @@ export const ItemDetail = (props) => {
     const [Item, setItem] = useState();
     const [loading, setLoading] = useState(true);
     const params = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         ItemDataService.get(params.id)
@@ -26,9 +27,9 @@ export const ItemDetail = (props) => {
         <>
             <div className="header header-item-details">
                 <div className="item-back-button">
-                    <Link to="/speisen" className="arrow-box">
+                    <a onClick={() => { navigate(-1) }} className="arrow-box">
                         <span className="arrow arrow-left"></span>
-                    </Link>
+                    </a>
                 </div>
             </div>
             <div className="content-item-details">

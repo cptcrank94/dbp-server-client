@@ -4,6 +4,7 @@ import {
     UPDATE_ITEM,
     DELETE_ITEM,
     DELETE_ALL_ITEMS,
+    RETRIEVE_FEATURED_ITEMS,
 } from './type.js';
 import ItemDataService from '../services/item.service';
 export const createItem = (title, description, featured, price, category, extras, allergies ) => async (dispatch) => {
@@ -32,6 +33,18 @@ export const retrieveItems = (catName) => async(dispatch) => {
         const res = await ItemDataService.getAll(catName);
         dispatch({
             type: RETRIEVE_ITEMS,
+            payload: res.data,
+        });
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+export const retrieveFeaturedItems = () => async(dispatch) => {
+    try {
+        const res = await ItemDataService.getFeatured();
+        dispatch({
+            type: RETRIEVE_FEATURED_ITEMS,
             payload: res.data,
         });
     } catch(err) {

@@ -10,6 +10,7 @@ const router = express.Router();
 };*/
 
 app.use(cors());
+
 const db = require("./app/models");
 db.mongoose
     .connect(db.url, {

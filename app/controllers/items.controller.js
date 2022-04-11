@@ -45,7 +45,7 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve all Cards
+// Retrieve all items by cat
 exports.findAll = (req, res) => {
     const catName = req.params.catName;
     //var condition = catName ? { parent: { $regex: new RegExp(catName), $options: "i" } } : {};
@@ -56,6 +56,17 @@ exports.findAll = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({ message: err.message || "Es ist ein Fehler beim Abrufen aller Artikel aufgetreten." })
+        })
+};
+
+// Retrieve featured items
+exports.findFeatured = (req, res) => {
+    Item.find({featured: true})
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message || "Es ist ein Fehler beim Abrufen der Monatskarte aufgetreten. "})
         })
 };
 

@@ -6,6 +6,7 @@ import Drinks from './components/Drinks/Drinks';
 import FAQ from './components/FAQ/FAQ';
 import Food from './components/Food/Food';
 import ItemDetail from './components/ItemDetail/ItemDetail';
+import Admin from './components/Admin/Admin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class App extends Component{
@@ -43,6 +44,7 @@ class App extends Component{
             <Route path="/speisen/:catName" element={<Food />} />
             <Route exact path="/items/detail/:id" element={<ItemDetail />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route exact path="/admin" element={<Admin />} />
         </Routes>
       </div>
     )

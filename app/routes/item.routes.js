@@ -4,6 +4,8 @@ module.exports = app => {
     const auth = require("../middleware/auth");
     // Neuen Artikel erstellen
     router.post("/", auth, items.create);
+    // Featured Produkte anzeigen
+    router.get("/featured/", items.findFeatured);
     // Alle Artikel anzeigen
     router.get("/:catName", items.findAll);
     // Zeige Artikel mit ID an
