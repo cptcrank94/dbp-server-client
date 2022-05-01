@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { retrieveFeaturedItems } from '../../actions/items';
 import ItemDataService from '../../services/item.service';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Navbar from "../Navigation/Navbar";
 
 function Home() {
   const [featured, setFeatured] = useState([]);
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     ItemDataService.getFeatured()
@@ -18,13 +19,14 @@ function Home() {
             console.log(e);
         })
 
-        setisLoading(false);
+        setLoading(false);
   }, []);
 
   if (isLoading) return "Loading...";
 
   return (
     <>
+      <Navbar />
       <div className="header">
           <div className="header-search">
               <form>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ItemDataService from '../../services/item.service';
+import Navbar from "../Navigation/Navbar";
 
 export const ItemDetail = (props) => {
 
@@ -25,6 +26,7 @@ export const ItemDetail = (props) => {
 
     return (
         <>
+            <Navbar />
             <div className="header header-item-details">
                 <div className="item-back-button">
                     <a onClick={() => { navigate(-1) }} className="arrow-box">
@@ -43,7 +45,7 @@ export const ItemDetail = (props) => {
                                 <div key={key} className="item-detail-price">
                                     <span className="item-detal-price-portion-small">{value.size}</span>
                                     <div className="item-detail-order">
-                                        <span className="item-detail-price-text">{value.priceTag}</span>
+                                        <span className="item-detail-price-text">{value.priceTag} €</span>
                                     </div>
                                 </div>
                             ))
@@ -55,10 +57,10 @@ export const ItemDetail = (props) => {
                         <h2>Allergene</h2>
                         <div className="ingredient-container">
                             {
-                                Object.entries(Item.allergies).map(([key, value]) => (
-                                    <div key={key} className="ingredient-item">
-                                        <span className="ingredient-img">Icon</span>
-                                        <span className="ingredient-text">{value.name}</span>
+                                Item.allergies.map((item) => (
+                                    <div key={item} className={`ingredient-item ${item.toLowerCase()}`}>
+                                        <span className="ingredient-icon"></span>
+                                        <span className="ingredient-text">{item}</span>
                                     </div>
                                 ))
                             }

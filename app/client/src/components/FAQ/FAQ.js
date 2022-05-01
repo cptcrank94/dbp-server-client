@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Navbar from "../Navigation/Navbar";
 
 function FAQ() {
   return (
-    <div>FAQ</div>
+    <div>
+      <Navbar />
+    </div>
   )
 }
 

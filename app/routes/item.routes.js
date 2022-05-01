@@ -7,11 +7,13 @@ module.exports = app => {
     // Featured Produkte anzeigen
     router.get("/featured/", items.findFeatured);
     // Alle Artikel anzeigen
+    router.get("/", items.findAllItems);
+    // Alle Artikel nach Kategorie anzeigen
     router.get("/:catName", items.findAll);
     // Zeige Artikel mit ID an
     router.get("/detail/:id", items.findOne);
     // Einen Artikel updaten
-    router.put("/:id", auth, items.update);
+    router.put("/:id", items.update);
     // Einen Artikel anhand der ID löschen
     router.delete("/:id", auth, items.delete);
     // Alle Artikel löschen

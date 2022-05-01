@@ -21,8 +21,20 @@ export const createCat = (title) => async (dispatch) => {
     }
 };
 
-export const retrieveCats = () => async(dispatch) => {
-    try {
+export const retrieveCats = () => async (dispatch) => {
+    return CategoryDataService.getAll().then(
+        (data) => {
+            dispatch({
+                type: RETRIEVE_CATS,
+                payload: data.data,
+            });
+        }, (error) => {
+            console.log(error);
+        }
+    )
+    
+    
+    /*try {
         const res = await CategoryDataService.getAll();
         dispatch({
             type: RETRIEVE_CATS,
@@ -30,7 +42,7 @@ export const retrieveCats = () => async(dispatch) => {
         });
     } catch(err) {
         console.log(err);
-    }
+    }*/
 }
 
 export const updateCat = (id, data) => async(dispatch) => {

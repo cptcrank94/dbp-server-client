@@ -7,6 +7,6 @@ module.exports = app => {
     // Refresk Token
     router.post("/refresh-token", user.refreshToken);
     // Logout
-    router.delete("/logout", user.logout);
+    //router.delete("/logout", user.logout);
     app.use("/api/auth", router);
 }

@@ -1,42 +1,20 @@
-import React, { Component } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
-
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Drinks from './components/Drinks/Drinks';
 import FAQ from './components/FAQ/FAQ';
 import Food from './components/Food/Food';
 import ItemDetail from './components/ItemDetail/ItemDetail';
 import Admin from './components/Admin/Admin';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import AdminArticles from './components/Admin/Articles';
+import AdminEditArticle from './components/Admin/Edit-Article';
+import AdminCategorys from './components/Admin/Categorys';
+import AdminEditCategory from './components/Admin/Edit-Category';
+import Login from './components/Login/Login';
 
-class App extends Component{
-  render() {
+function App() {
     return (
       <div>
-        <nav className="navigation-container">
-          <ul className="navigation">
-            <li>
-              <Link to={"/"} className="nav-item">
-                <FontAwesomeIcon icon="fa-house" />
-              </Link>
-            </li>
-            <li>
-              <Link to={"/getraenke"} className="nav-item">
-                <FontAwesomeIcon icon="fa-champagne-glasses" />
-              </Link>
-            </li>
-            <li>
-              <Link to={"/speisen"} className="nav-item">
-                <FontAwesomeIcon icon="fa-burger" />
-              </Link>
-            </li>
-            <li>
-              <Link to={"/faq"} className="nav-item">
-                <FontAwesomeIcon icon="fa-question" />
-              </Link>
-            </li>
-          </ul>
-        </nav>
         <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/getraenke" element={<Drinks />} />
@@ -45,10 +23,15 @@ class App extends Component{
             <Route exact path="/items/detail/:id" element={<ItemDetail />} />
             <Route path="/faq" element={<FAQ />} />
             <Route exact path="/admin" element={<Admin />} />
+            <Route exact path="/admin/articles" element={<AdminArticles />} />
+            <Route exact path="/admin/articles/:id" element={<AdminEditArticle />} />
+            <Route exact path="/admin/categorys" element={<AdminCategorys />} />
+            <Route exact path="/admin/categorys/:id" element={<AdminEditCategory />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route path="*" element={<Home />} />
         </Routes>
       </div>
     )
-  }
 }
 
 export default App;

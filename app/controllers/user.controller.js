@@ -1,7 +1,9 @@
 const bcrypt = require("bcryptjs/dist/bcrypt");
+const config = require("../config/auth.config");
 const jwt = require("jsonwebtoken");
 const db = require("../models");
 const User = db.user;
+const { refreshToken: RefreshToken } = db;
 
 // Register
 /*exports.create = async (req, res) => {
@@ -46,48 +48,20 @@ const User = db.user;
         });
 };*/
 
-// Refresh Token generieren
-exports.refreshToken = async(req, res) => {
+/*exports.logout = async(req, res) => {
     try {
-        const { refreshToken } = req.body;
-        if(!refreshToken) {
-            return res.status(403).send({ message: "Zugang verwehrt, Token nicht vorhanden!" } );
-        } else {
-            const checkToken = await Token.findOne({ refreshToken: refreshToken});
-            if (!checkToken) {
-                return res.status(401).send({message: "Token abgelaufen!"});
-            } else {
-                const payload = jwt.verify(checkToken.token, process.env.REFRESH_TOKEN_KEY);
-                const accessToken = jwt.sign(
-                    { user: payload },
-                    process.env.ACCESS_TOKEN_KEY,
-                    {
-                        expiresIn: "10m",
-                    }
-                );
-                return res.status(200).send({ accessToken } );
-            }
-        }
-
-    } catch(err) {
-        return res.status(500).send({error: "Internal Server Error!"});
-    }
-}
-
-exports.logout = async(req, res) => {
-    try {
-        const { refreshToken } = req.body;
-        await Token.findOneAndDelete({ token: refreshToken });
-        return res.status(200).send({ success: "User loggoed out!"});
+        const token = req.headers["x-access-token"];
+        await Token.findOneAndDelete({ token: token });
+        return res.status(200).send({ success: "User logged out!"});
     } catch (err) {
         return res.status(500).send({ error: "Internal Server Error!"});
     }
-}
+}*/
 
 // Login
 exports.login = async (req, res) => {
     const { username, password } = req.body;
-    
+
     if (!(username && password)) {
         res.status(400).send("Alle Felder sind auszufüllen!");
     }
@@ -99,31 +73,27 @@ exports.login = async (req, res) => {
         } else {
             let valid = await bcrypt.compare(password, user.password);
             if (valid) {
-                const accessToken = await jwt.sign(
-                    { user: { _id, username } },
-                    process.env.ACCESS_TOKEN_KEY,
+                let accessToken = await jwt.sign(
+                    { id: user.id },
+                    config.secret,
                     {
-                        expiresIn: "10m",
+                        expiresIn: config.jwtExpiration,
                     }
                 );
 
-                const refreshToken = await jwt.sign(
-                    { user: {_id, username } },
-                    process.env.REFRESH_TOKEN_KEY,
-                    {
-                        expiresIn: "1d",
-                    }
-                )
+                let token = await RefreshToken.createToken(user);
 
-                user.refreshToken = refreshToken;
+                user.refreshToken = token;
                 user.accessToken = accessToken;
 
-                User.findById(user.id)
+                res.status(200).send(user);
+
+                /*User.findById(user._id)
                     .then(data => {
-                        res.send(data);
+                        res.send(user);
                     }).catch(err => {
                         res.status(500).send({message: err.message || "Es ist ein Fehler beim Abrufen des Users aufgetreten. "})
-                    })
+                    })*/
             } else {
                 return res.status(401).send({ message: "Falsches Passwort!" } );
             }
@@ -132,3 +102,37 @@ exports.login = async (req, res) => {
         return res.status(500).send({ message: err.message || "Internal Server Error!" });
     }
 };
+
+exports.refreshToken = async (req, res) => {
+    const refreshToken = req.headers["x-access-token"];
+    if (refreshToken == null) {
+        return res.status(403).send("Refresh Token wird benötigt!");
+    }
+    try {
+        let token = await RefreshToken.findOne({token: refreshToken});
+        if (!token) {
+            return res.status(403).send("Refresh Token nicht gefunden!");
+        }
+        
+        if(RefreshToken.verifyExpiration(token)) {
+            console.log("Bin hier");
+            RefreshToken.findByIdAndRemove(token._id, {useFindAndModify: false}).exec();
+            return res.status(403).send("Refresh Token abgelaufen. Bitte erneut einloggen!");
+        }
+
+        let newToken = await jwt.sign(
+            { id: token.user },
+            config.secret,
+            {
+                expiresIn: config.jwtExpiration,
+            }
+        );
+
+        return res.status(200).send({
+            accessToken: newToken,
+            refreshToken: token.token,
+        });
+    } catch (err) {
+        return res.status(500).send(err);
+    }
+}

@@ -13,9 +13,7 @@ module.exports = mongoose => {
                 name: { type: String },
                 price: { type: String }
             }],
-            allergies: [{
-                name: { type: String }
-            }]
+            allergies: Array
         },
         { timestamps: true }
     );

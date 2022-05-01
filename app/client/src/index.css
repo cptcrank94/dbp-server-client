@@ -254,12 +254,15 @@ body {
 .cat-nav .cat-item {
   margin-right: 20px;
   white-space: nowrap;
+  cursor: pointer;
+  padding-bottom: 3px;
 }
 
 .cat-nav .cat-item.active {
   font-size: 1.8em;
   color: #333;
   font-weight: 600;
+  border-bottom: 2px solid #dbad55;
 }
 
 /* ######### ITEM DETAILS ########### */
@@ -318,12 +321,9 @@ body {
 }
 
 .item-detail .item-detail-price .item-detail-price-text {
-  font-size: .9em;
-  margin-left: 10px;
+  font-size: 1.1em;
   font-weight: 600;
-  background: #FFF;
   border-radius: 20px;
-  padding: 5px 50px 5px 15px;
 }
 
 .item-order-control {
@@ -364,19 +364,252 @@ body {
 }
 
 .ingredient-item {
-  background: #FFF;
+  background-color: #FFF;
   border-radius: 20px;
   padding: 20px;
   text-align: center;
   margin-left: 10px;
-  min-width: 100px;
+  color: #FFF;
 }
 
-.ingredient-item .ingredient-img {
+.ingredient-item .ingredient-icon {
   display: block;
-  margin-bottom: 5px;
+  width: 100%;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-position: center;
+  padding:0 25px;
+}
+
+.ingredient-item.gluten {
+  background-color: #fa9058;
+}
+
+.ingredient-item.krebs {
+  background-color: #e54f4e;
+}
+
+.ingredient-item.eier {
+  background-color: #fee060;
+}
+
+.ingredient-item.fische {
+  background-color: #6797cb;
+}
+
+.ingredient-item.erdnüsse {
+  background-color: #f1bca5;
+}
+
+.ingredient-item.soja {
+  background-color: #94da87;
+}
+
+.ingredient-item.milch {
+  background-color: #d7dce8;
+}
+
+.ingredient-item.schalenfrüchte {
+  background-color: #f298ab;
+}
+
+.ingredient-item.sellerie {
+  background-color: #bcaeb4;
+}
+
+.ingredient-item.senf {
+  background-color: #fac861;
+}
+
+.ingredient-item.sesam {
+  background-color: #cdae9a;
+}
+
+.ingredient-item.schwefeldioxid {
+  background-color: #57a7a3;
+}
+
+.ingredient-item.lupinen {
+  background-color: #e9bd13;
+}
+
+.ingredient-item.weichtiere {
+  background-color: #ef97ab;
+}
+
+.ingredient-item.gluten .ingredient-icon {
+  background-image: url("assets/icons/gluten.png");
+}
+
+.ingredient-item.krebs .ingredient-icon {
+  background-image: url("assets/icons/krebs.png");
+}
+
+.ingredient-item.eier .ingredient-icon {
+  background-image: url("assets/icons/eier.png");
+}
+
+.ingredient-item.fische .ingredient-icon {
+  background-image: url("assets/icons/fish.png");
+}
+
+.ingredient-item.erdnüsse .ingredient-icon {
+  background-image: url("assets/icons/erdnuesse.png");
+}
+
+.ingredient-item.soja .ingredient-icon {
+  background-image: url("assets/icons/soja.png");
+}
+
+.ingredient-item.milch .ingredient-icon {
+  background-image: url("assets/icons/milch.png");
+}
+
+.ingredient-item.schalenfrüchte .ingredient-icon {
+  background-image: url("assets/icons/schalenfruechte.png");
+}
+
+.ingredient-item.sellerie .ingredient-icon {
+  background-image: url("assets/icons/sellerie.png");
+}
+
+.ingredient-item.senf .ingredient-icon {
+  background-image: url("assets/icons/senf.png");
+}
+
+.ingredient-item.sesam .ingredient-icon {
+  background-image: url("assets/icons/sesam.png");
+}
+
+.ingredient-item.schwefeldioxid .ingredient-icon {
+  background-image: url("assets/icons/sulfite.png");
+}
+
+.ingredient-item.lupinen .ingredient-icon {
+  background-image: url("assets/icons/lupinen.png");
+}
+
+.ingredient-item.weichtiere .ingredient-icon {
+  background-image: url("assets/icons/weichtiere.png");
 }
 
 .ingredient-item .ingredient-text {
   font-size: .9em;
+}
+
+/* ######### LOGIN ########### */
+
+.login-form {
+  background-color: #FFF;
+  padding: 2rem;
+  max-width: 20rem;
+  margin: 2rem auto;
+  border-radius: 20px;
+}
+
+.input-container label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+input {
+  border-radius: 5px;
+  padding: .25rem;
+  border-style: solid;
+  border-width: 1.5px;
+  outline: none;
+  width: 100%;
+}
+
+.button-container {
+  margin-top: 10px;
+}
+
+.button-container input {
+  border-color: transparent;
+  background: #dbad55;
+  color: #FFF;
+  cursor: pointer;
+}
+
+.login-title {
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* ######### ADMIN PANEL ########### */
+
+.admin-navigation {
+  height: 100%;
+  max-width: 200px;
+  width: 100%;
+}
+
+.admin-nav-list {
+  height: 100%;
+  list-style: none;
+  padding: 0 0 0 20px;
+}
+
+.admin-nav-list li {
+  margin: 10px 0;
+}
+
+.admin-nav-list li a {
+  text-decoration: none;
+}
+
+.admin-nav-list li svg {
+  width: 20px;
+  margin-right: 15px;
+}
+
+.admin-content {
+  display: flex;
+  width: 100%;
+}
+
+.admin-content .left-content {
+  max-width: 150px;
+  width: 100%;
+}
+
+.admin-content .right-content {
+  margin-top: 10px;
+  width: 100%;
+  padding: 0 30px;
+}
+
+.MuiTableRow-hover {
+  cursor: pointer;
+}
+
+/* #########
+ ADMIN PANEL
+ ARTIKEL BEARBEITEN
+########### */
+
+form > div {
+  padding: 15px 0;
+}
+
+.article-allergene-checkboxes {
+  display: flex;
+  flex-flow: row wrap;
+  width: 350px;
+}
+
+.price-list-container,
+.extras-list-container {
+  padding: 0;
+}
+
+.price-list-item,
+.extras-list-item {
+  display: flex;
+  max-width: 500px;
+  align-items: center;
 }

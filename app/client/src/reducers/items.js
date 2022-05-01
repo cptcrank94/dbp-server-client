@@ -1,10 +1,12 @@
 import {
     CREATE_ITEM,
     RETRIEVE_ITEMS,
+    RETRIEVE_ALL_ITEMS,
     RETRIEVE_FEATURED_ITEMS,
     UPDATE_ITEM,
     DELETE_ITEM,
-    DELETE_ALL_ITEMS
+    DELETE_ALL_ITEMS,
+    RETRIEVE_ITEM_DETAIL,
 } from '../actions/type';
 const initialState = [];
 function itemReducer(items = initialState, action) {
@@ -14,7 +16,11 @@ function itemReducer(items = initialState, action) {
             return [...items, payload];
         case RETRIEVE_ITEMS:
             return payload;
+        case RETRIEVE_ALL_ITEMS:
+            return payload;
         case RETRIEVE_FEATURED_ITEMS:
+            return payload;
+        case RETRIEVE_ITEM_DETAIL:
             return payload;
         case UPDATE_ITEM:
             return items.map((item) => {

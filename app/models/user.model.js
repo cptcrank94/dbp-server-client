@@ -3,7 +3,7 @@ module.exports = mongoose => {
         {
             username: {type: String, required: true, unique: true},
             password: {type: String, required: true},
-            refreskToken: String,
+            refreshToken: String,
             accessToken: String
         }
     );

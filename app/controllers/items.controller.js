@@ -59,6 +59,16 @@ exports.findAll = (req, res) => {
         })
 };
 
+exports.findAllItems = (req, res) => {
+    Item.find()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message || "Es ist ein Fehler beim Abrufen der Artikel aufgetreten. "})
+        })
+}
+
 // Retrieve featured items
 exports.findFeatured = (req, res) => {
     Item.find({featured: true})
@@ -89,6 +99,7 @@ exports.update = (req, res) => {
         return res.status(400).send({ message: "Daten dürfen nicht leer sein." });
     }
     const id = req.params.id;
+    console.log(req.body);
     Item.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
         .then(data => {
             if (!data) {

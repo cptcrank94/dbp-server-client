@@ -7,4 +7,5 @@ db.url = dbConfig.url;
 db.category = require("./category.model.js")(mongoose);
 db.items = require("./items.model.js")(mongoose);
 db.user = require("./user.model.js")(mongoose);
+db.refreshToken = require("./refreshToken.model.js");
 module.exports = db;

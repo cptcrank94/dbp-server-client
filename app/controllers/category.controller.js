@@ -10,7 +10,7 @@ exports.create = (req, res) => {
 
     const category = new Category({
         title: req.body.title,
-        uri: req.body.url,
+        prio: req.body.prio,
     });
 
     category
@@ -26,10 +26,11 @@ exports.create = (req, res) => {
 // Retrieve all Cards
 exports.findAll = (req, res) => {
     const title = req.query.title;
-    var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+    var condition = title ? { title: { $regex: new RegExp(title), $options: "i" },  } : {};
     Category.find(condition)
         .then(data => {
-            res.send(data);
+            const sendData = data.sort((a,b) => a - b).reverse();
+            res.send(sendData);
         })
         .catch(err => {
             res.status(500).send({ message: err.message || "Es ist ein Fehler beim Abrufen aller Kategorien aufgetreten." })

@@ -1,0 +1,20 @@
+BACKEND:
+    LOGOUT:
+        - Logout Button
+        - Delete localStorage (Done)
+    FORMS:
+        - Create Item, Cat
+        - Edit Item, Cat
+        - Delete Item, Cat
+    ITEM:
+        - Title
+        - Desc
+        - Price (Array)
+        - Featured (Bool)
+        - Allergene (Array)
+        - Extras (Array)
+        - CatParent
+    CAT:
+        - Title
+        - Priority BIG "?"
+    
