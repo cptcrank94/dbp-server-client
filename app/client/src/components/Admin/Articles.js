@@ -1,7 +1,14 @@
 import React, {useState, useEffect} from 'react';
+
+// Data Service
 import { useDispatch } from 'react-redux';
 import { retrieveAllItems } from '../../actions/items';
-import { useNavigate } from 'react-router-dom';
+
+//Helper
+import { useNavigate, Link } from 'react-router-dom';
+
+// Material-UI
+import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,7 +17,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
+
+//Components
 import Admin from './Admin';
+
+// Redux-Store
 import store from "../../store";
 
 const columns = [
@@ -48,8 +59,11 @@ function AdminArticles() {
     <div className="admin-content">
       <div className="left-content"><Admin /></div>
       <div className="right-content">
-        <h2>Alle Artikel</h2>
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <div className="overview-header">
+          <h2>Alle Artikel</h2>
+          <Button variant="contained" component={Link} to={"/admin/articles/newArticle"}>Neuer Artikel</Button>
+        </div>
+        <Paper sx={{ width: '100%', overflow: 'hidden', marginTop: "30px" }}>
           <TableContainer sx={{ maxHeight: 800 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>

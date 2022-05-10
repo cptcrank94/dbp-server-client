@@ -3,9 +3,10 @@ import TokenService from "./token.service";
 class AuthService {
     login(username, password) {
         return http.post("/auth/login", { username, password }).then(response => {
-            if (response.data.accessToken) {
+            TokenService.setUser(response.data);
+            /*if (response.data.accessToken) {
                 TokenService.setUser(response.data);
-            }
+            }*/
             return response.data;
         });
     }

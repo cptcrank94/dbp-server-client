@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthService from '../../services/auth.service';
 import { connect, useDispatch } from "react-redux";
 import { login } from "../../actions/auth";
 import store from "../../store";
