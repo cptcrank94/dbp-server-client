@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 
 // Data Service
 import CategoryDataService from '../../services/category.service';
@@ -13,21 +12,9 @@ import { useForm, Controller, useFieldArray } from 'react-hook-form';
 
 import Admin from './Admin';
 
-function AdminEditCategory() {
+function AddCategory() {
   const [title, setTitle] = useState(""); // String
   const [prio, setPrio] = useState(0); // Number
-  const [isLoading, setLoading] = useState(true); // Boolean
-  const params = useParams();
-
-  useEffect(() => {
-    const fetchData = async() => {
-      const response = await CategoryDataService.get(params.id);
-      setTitle(response.data.title);
-      setPrio(response.data.prio);
-      setLoading(false);
-    }
-    fetchData();
-  }, [params.id]);
 
   // react-hook-form register form
   const { handleSubmit, register } = useForm();
@@ -37,16 +24,14 @@ function AdminEditCategory() {
     e.preventDefault();
 
     console.log(data);
-    CategoryDataService.update(params.id, data);
+    CategoryDataService.create(data);
   }
-
-  if(isLoading) return ('Loading...');
 
   return (
     <div className="admin-content">
       <div className="left-content"><Admin /></div>
       <div className="right-content">
-        <h2>Artikel bearbeiten (ID: {params.id})</h2>
+        <h2>Neue Kategorie anlegen</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <TextField
@@ -54,7 +39,7 @@ function AdminEditCategory() {
               {...register("title")}
               id="title"
               label="Name"
-              defaultValue={title || "Kategoriename"}
+              placeholder="Kategoriename"
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
@@ -73,7 +58,7 @@ function AdminEditCategory() {
               })}
               id="prio"
               label="Reihenfolge"
-              defaultValue={prio || "Priorität festlegen (0-100)"}
+              placeholder="Priorität festlegen (0-100)"
               onChange={(e) => setPrio(e.target.value)}
             />
           </div>
@@ -89,4 +74,4 @@ function AdminEditCategory() {
   )
 }
 
-export default AdminEditCategory
+export default AddCategory

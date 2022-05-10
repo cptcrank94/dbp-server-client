@@ -386,7 +386,7 @@ body {
   background-color: #fa9058;
 }
 
-.ingredient-item.krebs {
+.ingredient-item.krebstiere {
   background-color: #e54f4e;
 }
 
@@ -442,7 +442,7 @@ body {
   background-image: url("assets/icons/gluten.png");
 }
 
-.ingredient-item.krebs .ingredient-icon {
+.ingredient-item.krebstiere .ingredient-icon {
   background-image: url("assets/icons/krebs.png");
 }
 
@@ -589,8 +589,17 @@ input {
 
 /* #########
  ADMIN PANEL
- ARTIKEL BEARBEITEN
+ ARTIKEL, KATEGORIE BEARBEITEN
 ########### */
+
+.overview-header {
+  display: flex;
+  align-items: center;
+}
+
+.overview-header button {
+  margin-left: 20px;
+}
 
 form > div {
   padding: 15px 0;

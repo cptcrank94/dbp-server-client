@@ -1,4 +1,5 @@
 import http from "../http-common";
+import TokenService from "./token.service";
 class ItemDataService {
     getAllItems() {
         return http.get(`/items/`);
@@ -15,8 +16,8 @@ class ItemDataService {
     create(data) {
         return http.post("/items", data);
     }
-    update(id, data, headers) {
-        return http.put(`/items/${id}`, data, headers);
+    update(id, data) {
+        return http.put(`/items/${id}`, data);
     }
     delete(id) {
         return http.delete(`/items/${id}`);

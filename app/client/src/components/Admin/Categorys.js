@@ -1,7 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import { useDispatch } from 'react-redux';
+
+// Data Service
 import { retrieveCats } from '../../actions/categorys';
-import { useNavigate } from 'react-router-dom';
+
+// Helper
+import { useNavigate, Link } from 'react-router-dom';
+
+// Material-UI
+import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,8 +16,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
+
+// Components
 import Admin from './Admin';
+
+// Redux-Store
 import store from "../../store";
+import { useDispatch } from 'react-redux';
 
 const columns = [
   { id: 'title', label:'Name', minWidth: 170 },
@@ -27,11 +38,11 @@ function AdminCategorys() {
 
   useEffect(() => {
     dispatch(retrieveCats())
-            .then(() => {
-              setCats(store.getState().cats);
-            }).catch((err) => {
-                console.log(err);
-            });
+      .then(() => {
+        setCats(store.getState().cats);
+      }).catch((err) => {
+          console.log(err);
+      });
   }, [])
 
   const handleChangePage = (event, newPage) => {
@@ -47,8 +58,11 @@ function AdminCategorys() {
     <div className="admin-content">
       <div className="left-content"><Admin /></div>
       <div className="right-content">
-        <h2>Alle Kategorien</h2>
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <div className="overview-header">
+          <h2>Alle Kategorien</h2>
+          <Button variant="contained" component={Link} to={"/admin/articles/newCategory"}>Neue Kategorie</Button>
+        </div>
+        <Paper sx={{ width: '100%', overflow: 'hidden', marginTop: "30px" }}>
           <TableContainer sx={{ maxHeight: 800 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>

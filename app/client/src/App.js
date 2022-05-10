@@ -7,8 +7,10 @@ import Food from './components/Food/Food';
 import ItemDetail from './components/ItemDetail/ItemDetail';
 import Admin from './components/Admin/Admin';
 import AdminArticles from './components/Admin/Articles';
+import AdminAddArticle from './components/Admin/AddArticle.js';
 import AdminEditArticle from './components/Admin/Edit-Article';
 import AdminCategorys from './components/Admin/Categorys';
+import AdminAddCategory from './components/Admin/AddCategory';
 import AdminEditCategory from './components/Admin/Edit-Category';
 import Login from './components/Login/Login';
 
@@ -24,8 +26,10 @@ function App() {
             <Route path="/faq" element={<FAQ />} />
             <Route exact path="/admin" element={<Admin />} />
             <Route exact path="/admin/articles" element={<AdminArticles />} />
+            <Route exact path="/admin/articles/newArticle" element={<AdminAddArticle />} />
             <Route exact path="/admin/articles/:id" element={<AdminEditArticle />} />
             <Route exact path="/admin/categorys" element={<AdminCategorys />} />
+            <Route exact path="/admin/articles/newCategory" element={<AdminAddCategory />} />
             <Route exact path="/admin/categorys/:id" element={<AdminEditCategory />} />
             <Route exact path="/login" element={<Login />} />
             <Route path="*" element={<Home />} />

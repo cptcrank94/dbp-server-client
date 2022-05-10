@@ -3,7 +3,7 @@ module.exports = app => {
     var router = require("express").Router();
     const auth = require("../middleware/auth");
     // Neuen Artikel erstellen
-    router.post("/", auth, items.create);
+    router.post("/", items.create);
     // Featured Produkte anzeigen
     router.get("/featured/", items.findFeatured);
     // Alle Artikel anzeigen

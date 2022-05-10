@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import Admin from './Admin';
 import { useParams } from 'react-router-dom';
 
@@ -8,14 +8,13 @@ import CategoryDataService from '../../services/category.service';
 import TokenService from "../../services/token.service";
 
 // Form MUI
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
-import Select from '@mui/material/Select';
-import { InputLabel, MenuItem } from '@mui/material';
+import { MenuItem } from '@mui/material';
+
 // Form React-hook-form
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 
@@ -107,7 +106,7 @@ function AdminEditArticle() {
     e.preventDefault();
 
     console.log(data);
-    ItemDataService.update(params.id, data, accessToken);
+    ItemDataService.update(params.id, data);
   }
 
   if(isLoading) return ('Loading...');
